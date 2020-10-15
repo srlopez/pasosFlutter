@@ -38,7 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
   StreamController<Contador> _streamController;
   Stream<Contador> _stream;
 
-  var _sc = ScrollController(); //<-? inicializamos en initState?
+  ScrollController _sc;
+  // = ScrollController(); //<-? inicializamos en initState?
 
   @override
   void initState() {
@@ -47,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _streamController = StreamController();
     _stream = _streamController.stream;
 
+    _sc = ScrollController();
     _sc.addListener(() {
       if (_sc.position.atEdge) {
         if (_sc.position.pixels == 0)
