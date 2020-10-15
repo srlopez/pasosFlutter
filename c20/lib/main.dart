@@ -44,9 +44,13 @@ class _MyHomePageState extends State<MyHomePage> {
     int sg = _rnd.nextInt(7);
 
     setState(() {
-      _list.add(Contador(_nombrarConRetraso(sg), sg));
+      //_list.add(Contador(_nombrarConRetraso(sg), sg));
+      //_list.add(Contador(_fetchNombre(), sg));
+      _list.add(Contador(_nombre(sg), sg));
     });
   }
+
+  Future<String> _nombre(int i) async => 'Espero $i sg';
 
   Future<String> _nombrarConRetraso(int sg) =>
       Future.delayed(Duration(seconds: sg), _fetchNombre);
@@ -62,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //return jsonDecode(response.body)["name"];
       var name = jsonDecode(response.body)["results"][0]['name'];
       print(name.toString());
-      return '${name["title"]}. ${name["first"]} ${name["last"]} ';
+      return '${name["title"]}. ${name["first"]} ${name["last"]}';
     } else {
       print('response.statusCode $response.statusCode');
       throw Exception('No se encuentra un nombre');

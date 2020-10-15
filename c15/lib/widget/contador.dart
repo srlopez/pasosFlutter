@@ -12,8 +12,9 @@ class ContadorWidget extends StatefulWidget {
 class _ContadorWidgetState extends State<ContadorWidget> {
   // Los eventos que modifican el estado
   void _incrementCounter(int delta) {
-    widget.item.valor += delta;
-    setState(() {});
+    setState(() {
+      widget.item.valor += delta;
+    });
   }
 
   @override
