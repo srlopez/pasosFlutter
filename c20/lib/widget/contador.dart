@@ -25,6 +25,7 @@ class _ContadorWidgetState extends State<ContadorWidget> {
         FutureBuilder(
           future: widget.item.nombre,
           builder: (_, AsyncSnapshot<String> snapshot) {
+            //var x= condicion? true: false;
             var response = (snapshot.hasData)
                 ? '${snapshot.data}'
                 : (snapshot.hasError)
