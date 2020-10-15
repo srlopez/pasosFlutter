@@ -51,16 +51,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<String> _nombre(int i) async => 'Espero $i sg';
-
+/*
   Future<String> _nombrarConRetraso(int sg) =>
       Future.delayed(Duration(seconds: sg), _fetchNombre);
 
-  Future<String> _fetchNombre() async {
-    int id = 1 + _rnd.nextInt(9);
-    final response =
+
 //await http.get('https://jsonplaceholder.typicode.com/users/$id');
 //https://randomuser.me/api/?page=1&results=20&seed=123
-        await http.get('https://randomuser.me/api/');
+
+  Future<String> _fetchNombre() async {
+    int id = 1 + _rnd.nextInt(9);
+    final response = await http.get('https://randomuser.me/api/');
 
     if (response.statusCode == 200) {
       //return jsonDecode(response.body)["name"];
@@ -72,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
       throw Exception('No se encuentra un nombre');
     }
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
