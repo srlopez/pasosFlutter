@@ -1,9 +1,9 @@
-En este ejmplo mostramos
+# C30
 
-- Simplificamos el modelo y le quitamos el Future<String>
-  El Widget queda afectado, así que retiramos el Future Builder
-  Obtenemos el nombre de una Closure <- introducir closures
+Modificamos la aplicación simplificando el modelo, le quitamos el Future<String>, y como el Widget queda afectado, así que retiramos el Future Builder.
 
+APRENDER
+- Obtenemos el nombre de una Closure <- introducir closures
 - La idea es simular un scroll continuo
   cuando desplacemos la lista hacia arriba se añade 1 contador
   y tambien añadimos el contador con el FloatingActionButton, y si no se hace scroll

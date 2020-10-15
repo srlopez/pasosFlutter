@@ -1,7 +1,11 @@
-En este ejmplo mostramos
+# C25
 
--  Nos introducimos en la programacion reactiva asincrona con Streams
--  La idea es en lugar de añadir un Contador a una lista, lo añadamos a la corriente
+
+Modificamops la aplicacion para introducir conceptos de la programacion reactiva asincrona con Streams
+
+
+APRENDER
+-  La idea es en lugar de añadir un Contador a una lista, lo añadamos a la corriente/stream
 -  Crear controlador
   * obtener su salida stream
   * enviar datos a la entrada (sink) del controller
