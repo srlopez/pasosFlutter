@@ -4,7 +4,7 @@ Modificamos la aplicación simplificando el modelo, le quitamos el Future<String
 El objetivo es sólo entender el comportamiento de un controlador de scroll
 
 APRENDER
-- Obtenemos el nombre de una Closure <- introducir closures
+- Obtenemos el nombre de una Closure <- introducir closures [https://github.com/alxgcrz/apuntes-dart#lexical-closures]
 - Maneja un ScrollController -  Controllers manejadores de bajo nivel
 - La idea es simular un scroll continuo
   cuando desplacemos la lista hacia arriba se añade 1 contador
