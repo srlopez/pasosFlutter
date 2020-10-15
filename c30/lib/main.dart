@@ -1,3 +1,4 @@
+import 'package:c05/widget/circular_progress.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -34,11 +35,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var _list = <Contador>[];
+  var _isLoading = false;
 
   StreamController<Contador> _streamController;
   Stream<Contador> _stream;
 
-  ScrollController _sc;
+  ScrollController _scrollController;
   // = ScrollController(); //<-? inicializamos en initState?
 
   @override
@@ -48,17 +50,18 @@ class _MyHomePageState extends State<MyHomePage> {
     _streamController = StreamController();
     _stream = _streamController.stream;
 
-    _sc = ScrollController();
-    _sc.addListener(() {
-      if (_sc.position.atEdge) {
-        if (_sc.position.pixels == 0)
-          print('en top');
-        else {
-          print('en bottom');
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.position.atEdge) {
+        if (_scrollController.position.pixels > 0)
+          // en bottom
           // Acabamos de llegar al final del ultimo Widget pintado en pantall
-          // es hora de añadir uno mas
+          // es hora de añadir uno mas al sink
           _newContadorScroll();
-        }
+        // else {
+        //   //en top
+        //   assert(_scrollController.position.pixels == 0);
+        // }
       }
     });
   }
@@ -88,29 +91,17 @@ class _MyHomePageState extends State<MyHomePage> {
   void _newContador() async {
     // Enviamos una instancia del modelo al stream
     final _nombre = 'floating ${_nominar()}';
-    print(_nombre);
-    //await _fetchNombre();
     _streamController.sink.add(Contador(_nombre, _list.length));
-    // No tenemos que llamar setState ?¿?¿
-    if (_sc.positions.isNotEmpty)
-      setState(() {
-        print('floating me muevo al final');
-        _sc.jumpTo(//fuerza un scroll
-            //para que no lance un scroll y añada un nuevo contador resto -1
-            _sc.position.maxScrollExtent - 1);
-      });
+
+    if (_scrollController.positions.isNotEmpty)
+      _scrollController.jumpTo(//fuerza un scroll
+          //para que no lance un scroll y añada un nuevo contador resto -1
+          _scrollController.position.maxScrollExtent - 1);
   }
 
   void _newContadorScroll() {
     final _nombre = 'scroll ${_nominar()}';
-    print(_nombre);
-
     _streamController.sink.add(Contador(_nombre, -_list.length));
-
-    // setState(() {
-    //   // Como lo añadimos a la lista y no al Stream OBLIGAMOS A PINTAR
-    //   _list.add(Contador(_nominar(), _list.length));
-    // });
   }
 
   @override
@@ -130,27 +121,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ));
             _list.add(snapshot.data);
             return ListView.builder(
-              controller:
-                  _sc, //<- necesario para controlar el scroll y preguntar
-              itemCount: _list.length +
-                  1, //<- necesario para obligar a mostrar un elemento más y poder preguntar
+              controller: _scrollController,
+              itemCount: _list.length + 1,
               itemBuilder: (_, i) {
-                return Column(children: [
-                  if (i < _list.length)
-                    ContadorWidget(item: _list[i])
-                  else ...[
-                    // Text(
-                    //     '${_sc.position.atEdge} ${_sc.position.pixels} ${_sc.position.maxScrollExtent}',
-                    //     style: Theme.of(context).textTheme.headline6),
-                    if ((_sc.position?.maxScrollExtent ?? 0) > 0)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: new Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      )
-                  ]
-                ]);
+                print('${_scrollController.position.pixels}');
+                return i < _list.length
+                    ? ContadorWidget(item: _list[i])
+                    : CircularProgress(_scrollController.position.pixels > 0);
               },
             );
           }),
@@ -158,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _newContador,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
