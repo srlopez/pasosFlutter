@@ -7,7 +7,7 @@ Modificamos la aplicación para que:
 
   - Eliminamos Floting Button
   - Se presentaran a la pantalla en vertical y un detalle del usuario al hacer click sobre uno
-  - El numero de elementos de la página inicial debe cubrir toda el espacio 'asignado' para permitir el scroll
+  - El número de elementos de la página inicial debe cubrir toda el espacio 'asignado' para permitir el scroll
   
 APRENDER
   - Http nos da un mapa .
