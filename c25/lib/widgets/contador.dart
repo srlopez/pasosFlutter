@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/contador.dart';
+import '../models/contador.dart';
 
 class ContadorWidget extends StatefulWidget {
   ContadorWidget({Key key, this.item}) : super(key: key);

@@ -5,8 +5,8 @@ import 'dart:math';
 import 'dart:convert';
 import 'dart:async';
 
-import 'model/contador.dart';
-import 'widget/contador.dart';
+import 'models/contador.dart';
+import 'widgets/contador.dart';
 
 void main() {
   runApp(MyApp());

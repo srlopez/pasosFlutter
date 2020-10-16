@@ -15,5 +15,5 @@ APRENDER
   - Convertir Map a Modelo y viceversa
 
 PRACTICA
-  - Convertir cada linea en un GestureDetector para mostrar el detalle en la parte de abajo de la pantalla
-  
+  - Modificar el widget del usuario para que muestre una foto
+  - Habrá que modifocar el
