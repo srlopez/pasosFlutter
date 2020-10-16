@@ -2,17 +2,18 @@
 
 Modificamos la aplicación para que:
   - El modelo sea un modelo con datos de usuario
-  - Separamos el modelo del repositorio
-  - Los datos se obtendran de una API Rest, paginando. Es el único momento asincrono.
+  - Organizamos el código en screens, widgets, services y models
+  - Los datos se obtendran de una API Rest, paginando. 
 
   - Eliminamos Floting Button
-  - Se presentaran a la pantalla en vertical y un detalle del usuario al hacer click sobre uno
-  - El número de elementos de la página inicial debe cubrir toda el espacio 'asignado' para permitir el scroll
+  - Se presentaran a la pantalla en vertical
+
+  Nota: El número de elementos de la página inicial debe cubrir toda el espacio 'asignado' para permitir el scroll
   
 APRENDER
-  - Http nos da un mapa .
+  - Http nos da un Map de Dart.
   - Convertir Map a Modelo y viceversa
 
 PRACTICA
   - Convertir cada linea en un GestureDetector para mostrar el detalle en la parte de abajo de la pantalla
-  - Aprendemos a convertir map a user, o si queremos la lista de Usuarios las guardamos como mapa
+  
