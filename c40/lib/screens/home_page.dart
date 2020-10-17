@@ -16,11 +16,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _page = 1;
-  var _rows = 20;
-  bool _isLoading = false;
+  //var _page = 1;
+  //var _rows = 20;
 
   var _ulist = <User>[];
+  bool _isLoading = false;
 
   ScrollController _scrollController;
 
@@ -42,9 +42,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future _getUsers() async {
-    _ulist = await widget.controller.fechtUsers(_page, _rows);
+    if (_isLoading) return;
+
+    _ulist = await widget.controller.fechtUsers(); //_page, _rows);
     print('length: ${_ulist.length}');
-    _page++;
+    //_page++;
   }
 
   @override
@@ -57,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Column(
           children: [
+            //Dividimos la pantalla en dos áreas
             Container(
                 height: MediaQuery.of(context).size.height -
                     MediaQuery.of(context).padding.top -
