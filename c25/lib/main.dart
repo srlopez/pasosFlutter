@@ -48,6 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     _streamController = StreamController();
     _stream = _streamController.stream;
+
+    Future<String> _nombrar(double i) async => '#${i}00000'.substring(0, 5);
+
+    for (var i = 2.0; i < 50; i *= 1.6) {
+      Future.delayed(Duration(milliseconds: (i * 1000).round()), () {
+        _streamController.sink.add(Contador(_nombrar(i), i.round()));
+      });
+    }
   }
 
   @override
