@@ -13,3 +13,25 @@ CORREGIR
 - TAMPOCO PODEMOS HACER SCROLL
    Obliga a covertir la Column a ListView
    
+```dart
+// El modelo
+class Contador {
+  String nombre;
+  int valor;
+  Contador(this.nombre, [this.valor = 0]);
+
+  // Podríamos haber introducido aquí el meodode incrementar
+}
+```
+
+Manejo de listas de Widgets
+```dart
+   children: <Widget>[
+      // lista de widgets..
+      // aplanamiento de listas
+      for (var item in _list) ...[
+         // lista de widgets por cada contador
+      ]),
+      ],
+          
+```
