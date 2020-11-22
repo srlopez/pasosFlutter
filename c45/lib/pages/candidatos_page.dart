@@ -55,6 +55,7 @@ class _CandidatosPageState extends State<CandidatosPage> {
       widget.candidatoCtrl.onSync.listen((bool syncState) {
         if (!mounted) return;
         setState(() {
+          print('onSync $syncState');
           _estaCargando = syncState;
         });
       });
@@ -75,7 +76,8 @@ class _CandidatosPageState extends State<CandidatosPage> {
     print('cargando...${widget.candidatoCtrl.pagina + 1}');
     // En modo sincrono se queda bloqueada cuando hemos vuelto de otroa página
     //_lista = await widget.candidatoCtrl.fechtCandidatos();
-    widget.candidatoCtrl.fechtCandidatos().then((_) => setState(() {}));
+    widget.candidatoCtrl.fechtCandidatos().then((_) => {});
+    //setState(() { print('then'); }));
   }
 
   @override
