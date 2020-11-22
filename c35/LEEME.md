@@ -5,7 +5,7 @@ Modificamos la aplicación para que:
   - Organizamos el código en screens, widgets, services y models
   - Los datos se obtendran de una API Rest, paginando. 
 
-  - Eliminamos Floting Button
+  - Eliminamos Floating Button
   - Se presentaran a la pantalla en vertical
 
   Nota: El número de elementos de la página inicial debe cubrir toda el espacio 'asignado' para permitir el scroll

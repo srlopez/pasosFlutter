@@ -47,12 +47,13 @@ class HttpServices implements Services {
 
   @override
   Future addUser() {
+    //POST
     return null;
   }
 
   @override
   Future<User> updateUser(User user) async {
-    // POST
+    // POST-PUT
     return user;
   }
 }
