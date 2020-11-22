@@ -1,5 +1,7 @@
 PROPUESTA de ARQUITECTURA COMPLETA
 - Provider
-- Controller
-- Services
+- Controller + Stream
+- Services + Future + Paginación de datos
 
+- Navegación
+- Scroll

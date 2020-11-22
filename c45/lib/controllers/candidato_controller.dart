@@ -17,8 +17,8 @@ class CandidatoController {
 
   // Stream para conocer si estamos haciendo una lectura de datos
   StreamController<bool> _onSyncController = StreamController();
-  Stream<bool> get onSync => _onSyncController.stream;
-  //Stream<bool> get onSyncB => _onSyncController.stream.asBroadcastStream();
+  //Stream<bool> get onSync => _onSyncController.stream;
+  Stream<bool> get onSync => _onSyncController.stream.asBroadcastStream();
   bool get hasListener => _onSyncController.hasListener;
 
   // Lectura de Candidatos

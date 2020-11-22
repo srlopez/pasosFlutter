@@ -1,5 +1,4 @@
 // El modelo
-import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 class Favorito {

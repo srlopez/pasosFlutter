@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:c45/models/constantes_model.dart';
 import 'package:c45/providers/favoritos_provider.dart';
 import 'package:c45/widgets/favoritos_contador.dart';
@@ -32,6 +34,7 @@ class _CandidatosPageState extends State<CandidatosPage> {
 
   @override
   void dispose() {
+    _scrollCtrl.dispose();
     super.dispose();
   }
 
@@ -39,20 +42,25 @@ class _CandidatosPageState extends State<CandidatosPage> {
   void initState() {
     // OJO: PROBLEMA DE NAVEGACION SI SE 'PUSH' ESTA PAGINA DE NUEVO
     // 0.- Se vuelve a invocar initState
-    // 1.- El Stream ya esta tomado <-
+    // 1.- El Stream ya esta tomado
     // 2.- Perdemos la página anterior
     super.initState();
 
-    // Shorcut a la lista
+    // Shortcut a la lista
     _lista = widget.candidatoCtrl.candidatos;
 
-    // Stream de información si está cargando elementos...
-    widget.candidatoCtrl.onSync.listen((bool syncState) {
-      //if (!mounted) return;
-      setState(() {
-        _estaCargando = syncState;
+    // SI NO HAY LISTENER
+    if (!widget.candidatoCtrl.hasListener) {
+      // Stream de información si está cargando elementos...
+      widget.candidatoCtrl.onSync.listen((bool syncState) {
+        if (!mounted) return;
+        setState(() {
+          _estaCargando = syncState;
+        });
       });
-    });
+      // Primera lectura de datos
+      this._fechtProximaPagina();
+    }
 
     // Lectura de página si hacemos scroll hacia arriba
     _scrollCtrl = ScrollController();
@@ -60,15 +68,14 @@ class _CandidatosPageState extends State<CandidatosPage> {
       if (_scrollCtrl.position.pixels == _scrollCtrl.position.maxScrollExtent)
         _fechtProximaPagina();
     });
-
-    // Primera lectura de datos
-    this._fechtProximaPagina();
   }
 
   Future _fechtProximaPagina() async {
     if (_estaCargando) return;
-    //_lista = podemos reasiganarla pero ya está en el intState
-    await widget.candidatoCtrl.fechtCandidatos();
+    print('cargando...${widget.candidatoCtrl.pagina + 1}');
+    // En modo sincrono se queda bloqueada cuando hemos vuelto de otroa página
+    //_lista = await widget.candidatoCtrl.fechtCandidatos();
+    widget.candidatoCtrl.fechtCandidatos().then((_) => setState(() {}));
   }
 
   @override
@@ -90,7 +97,7 @@ class _CandidatosPageState extends State<CandidatosPage> {
         drawer: NavigationDrawer(),
         body: Column(
           children: [
-            // Dividimos la pantalla en dos áreas
+            // LISTVIEW
             // Expand <- me gusta más, pero por no añadir más widgets
             Container(
                 height: MediaQuery.of(context).size.height -
@@ -99,18 +106,20 @@ class _CandidatosPageState extends State<CandidatosPage> {
                     ctes.alturaPie,
                 child: ListView.builder(
                   controller: _scrollCtrl,
+                  key: PageStorageKey('candidatos'), // par mantener el Estado
                   itemCount: _lista.length + 1, //+1 para forzar scroll
                   itemBuilder: (_, i) {
-                    if (i >= _lista.length)
+                    if (i == _lista.length)
                       return CircularProgress(_estaCargando);
                     return CandidatoWidget(item: _lista[i], index: i);
                   },
                 )),
+            //PIE
             Container(
                 height: ctes.alturaPie,
                 child: Center(
                     child: _estaCargando
-                        ? Text('Cargando...')
+                        ? Text('Cargando. . .')
                         : Text('Items: ${_lista.length}'))),
           ],
         ));

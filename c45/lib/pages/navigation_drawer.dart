@@ -1,6 +1,5 @@
-import 'package:c45/pages/dummy_page.dart';
 import 'package:flutter/material.dart';
-import '../routes/pageRoute.dart';
+import '../pages/dummy_page.dart';
 
 class NavigationDrawer extends StatelessWidget {
   @override
