@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var candidatosPage = MisConstantes(
+        // Constantes como si fuera un provider
         child: CandidatosPage(
             title: 'Flutter Demo Home Page', candidatoCtrl: controller));
 
@@ -36,6 +37,8 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: candidatosPage,
+      // Hacemos rutas de push/pop
+      // Las nombradas hace que Candidatos Page se vuelva a cargar
       // routes: {
       //   pageRoutes.home: (context) => HomePage(),
       //   pageRoutes.candidatos: (context) => candidatosPage,

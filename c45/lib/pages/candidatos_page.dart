@@ -35,20 +35,18 @@ class _CandidatosPageState extends State<CandidatosPage> {
     super.dispose();
   }
 
-  // whenDone() {
-  //   print('whenDone');
-  //   Navigator.of(context).pop();
-  // }
-
   @override
   void initState() {
+    // OJO: PROBLEMA DE NAVEGACION SI SE 'PUSH' ESTA PAGINA DE NUEVO
+    // 0.- Se vuelve a invocar initState
+    // 1.- El Stream ya esta tomado <-
+    // 2.- Perdemos la página anterior
     super.initState();
 
-    //PROBLEMA AL VOLVER A LA PAGINA
-    // 1.- El Strema ya esta tomado
-    // 2.- No volver a cargar pagina
+    // Shorcut a la lista
+    _lista = widget.candidatoCtrl.candidatos;
 
-    // if (!widget.candidatoCtrl.hasListener) {
+    // Stream de información si está cargando elementos...
     widget.candidatoCtrl.onSync.listen((bool syncState) {
       //if (!mounted) return;
       setState(() {
@@ -56,6 +54,7 @@ class _CandidatosPageState extends State<CandidatosPage> {
       });
     });
 
+    // Lectura de página si hacemos scroll hacia arriba
     _scrollCtrl = ScrollController();
     _scrollCtrl.addListener(() {
       if (_scrollCtrl.position.pixels == _scrollCtrl.position.maxScrollExtent)
@@ -63,18 +62,13 @@ class _CandidatosPageState extends State<CandidatosPage> {
     });
 
     // Primera lectura de datos
-    // A modificar
     this._fechtProximaPagina();
-    // } else
-    //   setState(() {
-    //     // recuperamos la liosta del controller
-    //     _lista = widget.candidatoCtrl.candidatos;
-    //   });
   }
 
   Future _fechtProximaPagina() async {
     if (_estaCargando) return;
-    _lista = await widget.candidatoCtrl.fechtCandidatos();
+    //_lista = podemos reasiganarla pero ya está en el intState
+    await widget.candidatoCtrl.fechtCandidatos();
   }
 
   @override

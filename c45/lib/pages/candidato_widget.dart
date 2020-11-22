@@ -27,12 +27,15 @@ class _CandidatoWidgetState extends State<CandidatoWidget> {
       title: Text(widget.item.nombre),
       subtitle: Text(widget.item.email),
       trailing: Consumer<Favoritos>(
-        builder: (BuildContext context, favoritos, Widget child) => InkWell(
-          child: Text("+Fav"),
-          onTap: () {
-            favoritos.addFavorito(widget.item);
-          },
-        ),
+        builder: (BuildContext context, favoritos, Widget child) =>
+            favoritos.esFavorito(widget.item)
+                ? InkWell(
+                    child: Icon(Icons.hail),
+                    onTap: () => favoritos.removeFavorito(widget.item))
+                : InkWell(
+                    child: Text("+Fav"),
+                    onTap: () => favoritos.addFavorito(widget.item),
+                  ),
       ),
     );
   }

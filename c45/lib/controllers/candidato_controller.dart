@@ -13,7 +13,7 @@ class CandidatoController {
   List<Candidato> _candidatos = [];
   int _proximaPage = 0;
   int get pagina => _proximaPage;
-  //List<Candidato> get candidatos => _candidatos;
+  List<Candidato> get candidatos => _candidatos;
 
   // Stream para conocer si estamos haciendo una lectura de datos
   StreamController<bool> _onSyncController = StreamController();
