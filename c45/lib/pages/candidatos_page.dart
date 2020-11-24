@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:c45/models/constantes_model.dart';
+import 'package:c45/pages/dummy_page.dart';
 import 'package:c45/providers/favoritos_provider.dart';
 import 'package:c45/widgets/favoritos_contador.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../widgets/circular_progress_widget.dart';
 import '../controllers/candidato_controller.dart';
 
 import 'candidato_widget.dart';
+import 'favoritos_page.dart';
 import 'navigation_drawer.dart';
 
 class CandidatosPage extends StatefulWidget {
@@ -90,13 +92,28 @@ class _CandidatosPageState extends State<CandidatosPage> {
           actions: [
             Consumer<Favoritos>(
                 builder: (BuildContext context, favoritos, Widget child) =>
-                    FavoritosContador(favoritos.lista.length)),
+                    Stack(
+                      children: [
+                        Positioned(
+                            top: 20,
+                            child: FavoritosContador(favoritos.lista.length)),
+                        IconButton(
+                          icon: Icon(Icons.favorite),
+                          onPressed: () {
+                            Scaffold.of(context).openEndDrawer();
+                          },
+                        ),
+                      ],
+                    )),
             SizedBox(
               width: 15,
             )
           ],
         ),
         drawer: NavigationDrawer(),
+        endDrawer: FavoritosPage(
+          title: 'Favoritos',
+        ),
         body: Column(
           children: [
             // LISTVIEW

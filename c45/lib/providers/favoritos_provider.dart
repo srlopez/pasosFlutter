@@ -19,8 +19,19 @@ class Favoritos with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeFavorito(Candidato candidato) {
-    lista.remove(lista.firstWhere((favorito) => favorito.id == candidato.id));
+  void removeCandidato(Candidato candidato) {
+    removeFavorito(lista.firstWhere((favorito) => favorito.id == candidato.id));
+  }
+
+  void removeFavorito(Favorito favorito) {
+    lista.remove(favorito);
+    notifyListeners();
+  }
+
+  void addIncrement(Favorito favorito, int delta) {
+    favorito.puntos += delta;
+    if (favorito.puntos < 1) favorito.puntos = 1;
+    if (favorito.puntos > 3) favorito.puntos = 3;
     notifyListeners();
   }
 }

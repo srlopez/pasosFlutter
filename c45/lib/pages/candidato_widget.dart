@@ -31,7 +31,7 @@ class _CandidatoWidgetState extends State<CandidatoWidget> {
             favoritos.esFavorito(widget.item)
                 ? InkWell(
                     child: Icon(Icons.hail),
-                    onTap: () => favoritos.removeFavorito(widget.item))
+                    onTap: () => favoritos.removeCandidato(widget.item))
                 : InkWell(
                     child: Text("+Fav"),
                     onTap: () => favoritos.addFavorito(widget.item),

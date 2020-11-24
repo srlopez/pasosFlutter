@@ -100,8 +100,7 @@ class MiDrawerBodyItem extends StatelessWidget {
           Icon(icon),
           Padding(
             padding: EdgeInsets.only(left: 8.0),
-            child: Text(text,
-                style: GoogleFonts.sourceSansPro(textStyle: display1)),
+            child: Text(text, style: GoogleFonts.lato(textStyle: display1)),
           )
         ],
       ),
