@@ -19,24 +19,17 @@ class FavoritosPage extends StatelessWidget {
       try {
         Navigator.of(context).pop();
       } catch (e) {}
-    return
-
-        // Scaffold(
-        //   appBar: AppBar(
-        //     title: Text(title),
-        //   ),
-        //   body:
-        //   Center(
-        // child:
-        GridView.builder(
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemCount: favoritos.lista.length,
-      itemBuilder: (BuildContext context, int index) {
-        return MiCardWidget(favoritos.lista[index]);
-      },
-      //),
-      //  ),
+    return Drawer(
+      child: GridView.builder(
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemCount: favoritos.lista.length,
+        itemBuilder: (BuildContext context, int index) {
+          return MiCardWidget(favoritos.lista[index]);
+        },
+        //),
+        //  ),
+      ),
     );
   }
 }
@@ -50,25 +43,26 @@ class MiCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-            width: 177,
+            //width: 177,
             //height: 450,
             //padding: EdgeInsets.all(10.0),
             child: Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
-                //color: Colors.red,
-                elevation: 10,
+                elevation: 20,
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Icon(Icons.person, size: 60),
-                    Text(favorito.nombre, style: TextStyle(fontSize: 15.0)),
-                    Text(favorito.id, style: TextStyle(fontSize: 13.0)),
-                    Text('${favorito.puntos}',
-                        style: TextStyle(fontSize: 40.0)),
+                    Icon(Icons.face, size: 30),
+                    Text(
+                      favorito.nombre,
+                      style: TextStyle(fontSize: 16.0),
+                      textAlign: TextAlign.center,
+                    ),
+                    //Text(favorito.id, style: TextStyle(fontSize: 13.0)),
                     Consumer<Favoritos>(
                       builder:
                           (BuildContext context, favoritos, Widget child) =>
@@ -78,6 +72,8 @@ class MiCardWidget extends StatelessWidget {
                           InkWell(
                               child: Icon(Icons.add),
                               onTap: () => favoritos.addIncrement(favorito, 1)),
+                          Text('${favorito.puntos}',
+                              style: TextStyle(fontSize: 20.0)),
                           InkWell(
                               child: Icon(Icons.remove),
                               onTap: () =>
