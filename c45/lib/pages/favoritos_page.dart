@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:c45/models/favorito_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,55 +45,65 @@ class FavoritoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Container(
-            width: 150,
-            height: 450,
-            //padding: EdgeInsets.all(10.0),
-            child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+      child: Container(
+        width: 150,
+        //height: 450,
+        //padding: EdgeInsets.all(10.0),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          elevation: 20,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Icon(Icons.face, size: 40),
+              SizedBox(
+                height: 40,
+                child: Center(
+                  child: Text(
+                    favorito.nombre,
+                    style: TextStyle(fontSize: 16.0),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                elevation: 20,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(Icons.face, size: 35),
-                    SizedBox(
-                      height: 50,
-                      child: Center(
-                        child: Text(
-                          favorito.nombre,
-                          style: TextStyle(fontSize: 16.0),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    //Text(favorito.id, style: TextStyle(fontSize: 13.0)),
+              ),
+              //Text(favorito.id, style: TextStyle(fontSize: 13.0)),
 
-                    Consumer<Favoritos>(
-                      builder:
-                          (BuildContext context, favoritos, Widget child) =>
-                              ButtonBar(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          InkWell(
-                              child: Icon(Icons.add),
-                              onTap: () => favoritos.addIncrement(favorito, 1)),
-                          Text('${favorito.puntos}',
-                              style: TextStyle(fontSize: 20.0)),
-                          InkWell(
-                              child: Icon(Icons.remove),
-                              onTap: () =>
-                                  favoritos.addIncrement(favorito, -1)),
-                          InkWell(
-                              child: Icon(Icons.person_remove),
-                              onTap: () => favoritos.removeFavorito(favorito))
-                        ],
-                      ),
+              Consumer<Favoritos>(
+                builder: (BuildContext context, favoritos, Widget child) =>
+                    ButtonBar(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      //mainAxisSize: MainAxisSize.min,
+                      children: [
+                        InkWell(
+                            child: Icon(Icons.add),
+                            onTap: () => favoritos.addIncrement(favorito, 1)),
+                        InkWell(
+                            child: Icon(Icons.remove),
+                            onTap: () => favoritos.addIncrement(favorito, -1)),
+                      ],
                     ),
+                    Text('${favorito.puntos}',
+                        style: TextStyle(fontSize: 41.0)),
+                    InkWell(
+                        child: Icon(
+                          Icons.person_remove,
+                          color: Colors.red[100],
+                        ),
+                        onTap: () => favoritos.removeFavorito(favorito))
                   ],
-                ))));
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
