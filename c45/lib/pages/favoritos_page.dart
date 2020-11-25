@@ -19,13 +19,14 @@ class FavoritosPage extends StatelessWidget {
       try {
         Navigator.of(context).pop();
       } catch (e) {}
+
     return Drawer(
       child: GridView.builder(
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemCount: favoritos.lista.length,
         itemBuilder: (BuildContext context, int index) {
-          return MiCardWidget(favoritos.lista[index]);
+          return FavoritoWidget(favoritos.lista[index]);
         },
         //),
         //  ),
@@ -34,8 +35,8 @@ class FavoritosPage extends StatelessWidget {
   }
 }
 
-class MiCardWidget extends StatelessWidget {
-  MiCardWidget(this.favorito, {Key key}) : super(key: key);
+class FavoritoWidget extends StatelessWidget {
+  FavoritoWidget(this.favorito, {Key key}) : super(key: key);
 
   Favorito favorito;
 
@@ -43,8 +44,8 @@ class MiCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-            //width: 177,
-            //height: 450,
+            width: 150,
+            height: 450,
             //padding: EdgeInsets.all(10.0),
             child: Card(
                 shape: RoundedRectangleBorder(
@@ -56,13 +57,19 @@ class MiCardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Icon(Icons.face, size: 30),
-                    Text(
-                      favorito.nombre,
-                      style: TextStyle(fontSize: 16.0),
-                      textAlign: TextAlign.center,
+                    Icon(Icons.face, size: 35),
+                    SizedBox(
+                      height: 50,
+                      child: Center(
+                        child: Text(
+                          favorito.nombre,
+                          style: TextStyle(fontSize: 16.0),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
                     //Text(favorito.id, style: TextStyle(fontSize: 13.0)),
+
                     Consumer<Favoritos>(
                       builder:
                           (BuildContext context, favoritos, Widget child) =>
