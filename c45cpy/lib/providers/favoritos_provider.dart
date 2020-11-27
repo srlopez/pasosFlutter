@@ -1,4 +1,3 @@
-import '../controllers/favorito_controller.dart';
 import 'package:flutter/material.dart';
 import '../models/favorito_model.dart';
 import '../models/candidato_model.dart';
@@ -6,11 +5,6 @@ import '../models/candidato_model.dart';
 class Favoritos with ChangeNotifier {
   var lista = <Favorito>[];
   var maxFavoritos = 5;
-  FavoritoController controller;
-
-  Favoritos(this.controller) {
-    controller.getAll().then((value) => lista = value);
-  }
 
   bool esFavorito(Candidato candidato) {
     return lista.fold(
@@ -20,13 +14,9 @@ class Favoritos with ChangeNotifier {
   }
 
   void addFavorito(Candidato candidato) {
-    if (lista.length < maxFavoritos && !esFavorito(candidato)) {
-      var fav = Favorito(nombre: candidato.nombre, id: candidato.id);
-      lista.add(fav);
-      //controller.saveAll();
-      controller.save(fav);
-      notifyListeners();
-    }
+    if (lista.length < maxFavoritos && !esFavorito(candidato))
+      lista.add(Favorito(nombre: candidato.nombre, id: candidato.id));
+    notifyListeners();
   }
 
   void removeCandidato(Candidato candidato) {
@@ -35,9 +25,6 @@ class Favoritos with ChangeNotifier {
 
   void removeFavorito(Favorito favorito) {
     lista.remove(favorito);
-
-    //controller.saveAll();
-    controller.delete(favorito);
     notifyListeners();
   }
 
@@ -45,9 +32,6 @@ class Favoritos with ChangeNotifier {
     favorito.puntos += delta;
     if (favorito.puntos < 1) favorito.puntos = 1;
     if (favorito.puntos > 3) favorito.puntos = 3;
-
-    //controller.saveAll();
-    controller.save(favorito);
     notifyListeners();
   }
 }

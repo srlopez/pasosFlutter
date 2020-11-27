@@ -1,31 +1,50 @@
-import 'package:c45/models/favorito_model.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class FavoritosServiceHive {
+import '../models/favorito_model.dart';
+import 'favorito_services_base.dart';
+
+class FavoritoServiceHive extends FavoritoServices {
+  var boxName = 'favoritos';
   Box box;
 
   dispose() => box.close();
 
-  Future<bool> initBox() async {
+  @override
+  Future<FavoritoServices> init() async {
+    Hive.registerAdapter(FavoritoAdapter());
     await Hive.initFlutter();
-    box = await Hive.openBox<Favorito>('favoritos');
+
+    box = await Hive.openBox<Favorito>(boxName);
+
+    return this;
+  }
+
+  @override
+  Future<List<Favorito>> getAll() async {
+    //print(box.toMap());
+    return box.values.toList();
+  }
+
+  @override
+  Future<bool> saveAll(List<Favorito> lf) async {
+    // borramos todo
+    await box.deleteAll(box.keys);
+    // insertamos todo
+    //box.addAll(lf);
+    lf.forEach((e) => box.put(e.id, e));
     return true;
   }
 
-  //getAll
-  getAll() {
-    box.toMap();
+  @override
+  Future<bool> delete(List<Favorito> lista, Favorito e) async {
+    box.put(e.id, e);
+    return true;
   }
 
-  //add
-  addItem(Favorito item) async {
-    box.add(item);
-  }
-
-  //delete
-  //update
-  updateItem(Favorito item) {
-    box.put(item.id, item);
+  @override
+  Future<bool> save(List<Favorito> lista, Favorito e) async {
+    box.delete(e.id);
+    return true;
   }
 }
