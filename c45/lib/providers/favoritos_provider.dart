@@ -8,7 +8,7 @@ class Favoritos with ChangeNotifier {
   var maxFavoritos = 5;
   FavoritoController controller;
 
-  Favoritos(this.controller) {
+  Favoritos({this.controller}) {
     controller.getAll().then((value) => lista = value);
   }
 

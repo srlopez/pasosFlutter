@@ -37,13 +37,13 @@ class FavoritoServiceHive extends FavoritoServices {
   }
 
   @override
-  Future<bool> delete(List<Favorito> lista, Favorito e) async {
+  Future<bool> save(List<Favorito> lista, Favorito e) async {
     box.put(e.id, e);
     return true;
   }
 
   @override
-  Future<bool> save(List<Favorito> lista, Favorito e) async {
+  Future<bool> delete(List<Favorito> lista, Favorito e) async {
     box.delete(e.id);
     return true;
   }

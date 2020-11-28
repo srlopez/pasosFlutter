@@ -1,11 +1,9 @@
 import 'package:c45/controllers/favorito_controller.dart';
 import 'package:c45/services/favorito_services_hive.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import 'models/constantes_model.dart';
-import 'models/favorito_model.dart';
 import 'pages/candidatos_page.dart';
 import 'pages/dummy_page.dart';
 import 'providers/favoritos_provider.dart';
@@ -16,15 +14,16 @@ import 'services/favorito_services_file.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  var httpUserService = HttpRandomUserServices();
-  var candidatoCtrl = CandidatoController(httpUserService);
+  var httpCandidatoService = HttpRandomUserServices();
+  var candidatoCtrl = CandidatoController(httpCandidatoService);
 
-  var localFavoritoService = FavoritoServicesFile();
+  //var localFavoritoService = FavoritoServicesFile();
+  var localFavoritoService = FavoritoServiceHive();
   await localFavoritoService.init();
   var favoritoCtrl = FavoritoController(localFavoritoService);
 
   runApp(ChangeNotifierProvider<Favoritos>(
-    create: (_) => Favoritos(favoritoCtrl),
+    create: (_) => Favoritos(controller: favoritoCtrl),
     child: MyApp(controller: candidatoCtrl),
   ));
 }
