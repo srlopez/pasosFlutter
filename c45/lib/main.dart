@@ -3,13 +3,12 @@ import 'package:c45/services/favorito_services_hive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'controllers/candidato_controller.dart';
 import 'models/constantes_model.dart';
 import 'pages/candidatos_page.dart';
 import 'pages/dummy_page.dart';
 import 'providers/favoritos_provider.dart';
 import 'services/candidato_services_randomuser.dart';
-import 'controllers/candidato_controller.dart';
-import 'services/favorito_services_file.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

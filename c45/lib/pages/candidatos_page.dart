@@ -1,16 +1,12 @@
-import 'dart:io';
-
-import 'package:c45/models/constantes_model.dart';
-import 'package:c45/pages/dummy_page.dart';
-import 'package:c45/providers/favoritos_provider.dart';
-import 'package:c45/widgets/favoritos_contador.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/candidato_model.dart';
-import '../widgets/circular_progress_widget.dart';
 import '../controllers/candidato_controller.dart';
-
+import '../models/candidato_model.dart';
+import '../models/constantes_model.dart';
+import '../providers/favoritos_provider.dart';
+import '../widgets/circular_progress_widget.dart';
+import '../widgets/favoritos_contador.dart';
 import 'candidato_widget.dart';
 import 'favoritos_page.dart';
 import 'navigation_drawer.dart';

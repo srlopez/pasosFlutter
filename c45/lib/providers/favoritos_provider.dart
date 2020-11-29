@@ -1,7 +1,8 @@
-import '../controllers/favorito_controller.dart';
 import 'package:flutter/material.dart';
-import '../models/favorito_model.dart';
+
+import '../controllers/favorito_controller.dart';
 import '../models/candidato_model.dart';
+import '../models/favorito_model.dart';
 
 class Favoritos with ChangeNotifier {
   var lista = <Favorito>[];

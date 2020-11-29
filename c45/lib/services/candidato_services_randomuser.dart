@@ -1,8 +1,9 @@
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'candidato_services_base.dart';
+import 'package:http/http.dart' as http;
+
 import '../models/candidato_model.dart';
+import 'candidato_services_base.dart';
 
 class HttpRandomUserServices implements CandidatoServices {
   final urlBase = 'https://randomuser.me/api/?seed=abc&nat=es';
