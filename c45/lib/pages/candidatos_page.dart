@@ -90,11 +90,17 @@ class _CandidatosPageState extends State<CandidatosPage> {
                 builder: (BuildContext context, favoritos, Widget child) =>
                     Stack(
                       children: [
-                        Positioned(
-                            top: 20,
-                            child: FavoritosContador(favoritos.lista.length)),
+                        if (favoritos.lista.length > 0)
+                          Positioned(
+                              top: 20,
+                              child: FavoritosContador(favoritos.lista.length)),
                         IconButton(
-                          icon: Icon(Icons.favorite),
+                          icon: Icon(
+                            Icons.favorite,
+                            color: favoritos.lista.length < 1
+                                ? Colors.amber
+                                : Colors.white,
+                          ),
                           onPressed: () {
                             Scaffold.of(context).openEndDrawer();
                           },
