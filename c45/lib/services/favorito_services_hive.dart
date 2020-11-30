@@ -16,6 +16,7 @@ class FavoritoServiceHive extends FavoritoServices {
     await Hive.initFlutter();
 
     box = await Hive.openBox<Favorito>(boxName);
+    print('Service HIVE');
 
     return this;
   }

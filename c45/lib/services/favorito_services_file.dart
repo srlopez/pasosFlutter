@@ -14,6 +14,7 @@ class FavoritoServicesFile extends FavoritoServices {
   }
   final separator = '¬';
 
+// DTO ===========================
   String favoritoToString(Favorito f) =>
       '${f.id}$separator${f.nombre}$separator${f.puntos}';
 
@@ -23,6 +24,8 @@ class FavoritoServicesFile extends FavoritoServices {
     f.puntos = int.parse(member[2]);
     return f;
   }
+
+  // DTO =========
 
   Future<String> get _localPath async {
     directory = directory ?? await getApplicationDocumentsDirectory();
@@ -35,7 +38,10 @@ class FavoritoServicesFile extends FavoritoServices {
   }
 
   @override
-  Future<FavoritoServices> init() async => this;
+  Future<FavoritoServices> init() async {
+    print('Service FILE');
+    return this;
+  }
 
   @override
   Future<List<Favorito>> getAll() async {

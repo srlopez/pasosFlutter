@@ -1,14 +1,15 @@
-import 'package:c45/controllers/favorito_controller.dart';
-import 'package:c45/services/favorito_services_hive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'controllers/candidato_controller.dart';
+import 'controllers/favorito_controller.dart';
 import 'models/constantes_model.dart';
 import 'pages/candidatos_page.dart';
 import 'pages/dummy_page.dart';
 import 'providers/favoritos_provider.dart';
 import 'services/candidato_services_randomuser.dart';
+import 'services/favorito_services_file.dart';
+import 'services/favorito_services_hive.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,8 +17,8 @@ void main() async {
   var httpCandidatoService = HttpRandomUserServices();
   var candidatoCtrl = CandidatoController(httpCandidatoService);
 
-  //var localFavoritoService = FavoritoServicesFile();
-  var localFavoritoService = FavoritoServiceHive();
+  var localFavoritoService = FavoritoServicesFile();
+  //var localFavoritoService = FavoritoServiceHive();
   await localFavoritoService.init();
   var favoritoCtrl = FavoritoController(localFavoritoService);
 
