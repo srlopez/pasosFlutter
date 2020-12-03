@@ -19,11 +19,10 @@ class FavoritoServiceLite extends FavoritoServices {
 
   @override
   Future<List<Favorito>> getAll() async {
-    //print(box.toMap());
     Database db = await dbHelper.database;
     final allRows = await db.query('favoritos');
     var lista = <Favorito>[];
-    allRows.forEach((row) => lista.add(favoritofromMap(row)));
+    allRows.forEach((row) => lista.add(favoritoFromMap(row)));
     return lista;
   }
 
@@ -32,7 +31,7 @@ class FavoritoServiceLite extends FavoritoServices {
     // borramos todo
     Database db = await dbHelper.database;
     db.execute('DELETE * FROM favoritos');
-    // insertamos todo
+    // insertamos cada uno
     lf.forEach((element) => save(lf, element));
     return true;
   }
@@ -41,13 +40,9 @@ class FavoritoServiceLite extends FavoritoServices {
   Future<bool> save(List<Favorito> lista, Favorito e) async {
     delete(lista, e);
     Database db = await dbHelper.database;
-    db.execute('INSERT INTO favoritos ( _id, nombre, puntos) VALUES ("' +
-        e.id +
-        '","' +
-        e.nombre +
-        '",' +
-        e.puntos.toString() +
-        ')');
+    db.execute('''
+    INSERT INTO favoritos ( _id, nombre, puntos) VALUES ('${e.id}','${e.nombre}',${e.puntos})
+        ''');
 
     return true;
   }
@@ -55,16 +50,17 @@ class FavoritoServiceLite extends FavoritoServices {
   @override
   Future<bool> delete(List<Favorito> lista, Favorito e) async {
     Database db = await dbHelper.database;
-    db.execute('DELETE FROM favoritos WHERE _id="' + e.id + '"');
+    db.execute('''
+    DELETE FROM favoritos WHERE _id='${e.id}'
+    ''');
     return true;
   }
 }
-// DTO ===========================
 
-Favorito favoritofromMap(Map<String, dynamic> json) {
+// DTO ===========================
+Favorito favoritoFromMap(Map<String, dynamic> json) {
   var fav = Favorito(nombre: json['nombre'], id: json['_id']);
-  print(json);
-  //fav.puntos = int.parse(json['puntos']);
+  //print(json);
   fav.puntos = json['puntos'];
   return fav;
 }
