@@ -5,8 +5,9 @@ El cual esta'compuesto por un
 - Services + Future + Paginación de datos
 
 
-Por ahora la principal usa un Provider y luego habrá otra
-- Provider
+Por ahora la pagina principal Candidatos  usa un Provider
+- Provider para acceder a la lista de Favoritos
+- La Persistencia de Favoritos con FileSystem, HIVE y SQFlite
 
 
 Se ha revisado la Navegación
