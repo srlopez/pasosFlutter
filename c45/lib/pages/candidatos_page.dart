@@ -48,18 +48,18 @@ class _CandidatosPageState extends State<CandidatosPage> {
     _lista = widget.candidatoCtrl.candidatos;
 
     // SI NO HAY LISTENER
-    if (!widget.candidatoCtrl.hasListener) {
-      // Stream de información si está cargando elementos...
-      widget.candidatoCtrl.onSync.listen((bool syncState) {
-        if (!mounted) return;
-        setState(() {
-          print('onSync $syncState');
-          _estaCargando = syncState;
-        });
+    //if (!widget.candidatoCtrl.hasListener) {
+    // Stream de información si está cargando elementos...
+    widget.candidatoCtrl.onSync.listen((bool syncState) {
+      //if (!mounted) return;
+      setState(() {
+        print('onSync $syncState');
+        _estaCargando = syncState;
       });
-      // Primera lectura de datos
-      this._fechtProximaPagina();
-    }
+    });
+    // Primera lectura de datos
+    this._fechtProximaPagina();
+    //}
 
     // Lectura de página si hacemos scroll hacia arriba
     _scrollCtrl = ScrollController();
